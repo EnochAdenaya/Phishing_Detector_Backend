@@ -1,13 +1,17 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
 import pickle
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Load the trained model
-model_path = r'C:\Users\USER\Documents\ML-Project\models\random_forest_model.pkl'
-vectorizer_path = r'C:\Users\USER\Documents\ML-Project\models\tfidf_vectorizer.pkl'
+model_path = os.path.join(BASE_DIR, "random_forest_model.pkl")
+vectorizer_path = os.path.join(BASE_DIR, "tfidf_vectorizer.pkl")
 
 with open(model_path, 'rb') as f:
     model = pickle.load(f)
